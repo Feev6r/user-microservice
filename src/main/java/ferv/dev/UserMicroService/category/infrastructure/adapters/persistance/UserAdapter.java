@@ -2,8 +2,13 @@ package ferv.dev.UserMicroService.category.infrastructure.adapters.persistance;
 
 import ferv.dev.UserMicroService.category.domain.models.User;
 import ferv.dev.UserMicroService.category.domain.ports.out.UserPersistancePort;
+import ferv.dev.UserMicroService.category.infrastructure.mappers.UserEntityMapper;
 import ferv.dev.UserMicroService.category.infrastructure.repositories.mysql.UserRepository;
+import ferv.dev.UserMicroService.commons.configurations.utils.Constants;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,44 +20,28 @@ import java.util.List;
 public class UserAdapter implements UserPersistancePort {
 
     private final UserRepository userRepository;
+    private final UserEntityMapper userEntityMapper;
 
     @Override
     public User getUserByEmail(String email) {
-        return null;
-    }
-
-    @Override
-    public void saveUser(User user) {
-
+        return userEntityMapper.toUser(userRepository.findByEmail(email).orElse(null));
     }
 
     @Override
     public User getUser(Long userId) {
-        return null;
+        return userEntityMapper.toUser(userRepository.findById(userId).orElse(null));
     }
 
     @Override
-    public List<User> getAllUser() {
-        return List.of();
+    public void saveUser(User user) {
+        userRepository.save(userEntityMapper.toEntity(user));
     }
 
-//    @Override
-//    public User getUserByEmail(String email) {
-//        return userEntityMapper.toUser(userRepository.findByEmail(email).orElse(null));
-//    }
-//
-//    @Override
-//    public User getUser(Long userId) {
-//        return userEntityMapper.toUser(userRepository.findById(userId).orElse(null));
-//    }
-//
-//    @Override
-//    public void saveUser(User user) {
-//        userRepository.save(userEntityMapper.toEntity(user));
-//    }
-//
-//    @Override
-//    public List<User> getAllUser() {
-//        return userEntityMapper.toUserList(userRepository.findAll());
-//    }
+    @Override
+    public List<User> getAllUser(Integer page, Integer size, boolean orderAsc) {
+        Pageable pagination;
+        if (orderAsc) pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_FIRSTNAME).ascending());
+        else pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_FIRSTNAME).descending());
+        return userEntityMapper.toUserList(userRepository.findAll(pagination).getContent());
+    }
 }
