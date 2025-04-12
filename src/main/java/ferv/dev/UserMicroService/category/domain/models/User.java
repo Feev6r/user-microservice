@@ -2,7 +2,6 @@ package ferv.dev.UserMicroService.category.domain.models;
 
 public class User {
 
-
     private Long id;
     private Role role;
     private String firstname;
@@ -26,10 +25,6 @@ public class User {
         this.birthdate = birthdate;
         this.email = email;
         this.password = password;
-    }
-
-    public String getUsername(){
-        return getId().toString();
     }
 
     public Long getId() {
