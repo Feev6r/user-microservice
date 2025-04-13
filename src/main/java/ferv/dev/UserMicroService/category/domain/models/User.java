@@ -1,5 +1,8 @@
 package ferv.dev.UserMicroService.category.domain.models;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class User {
 
     private Long id;
@@ -8,14 +11,14 @@ public class User {
     private String lastname;
     private String identityNumber;
     private String phoneNumber;
-    private String birthdate;
+    private LocalDate birthdate;
     private String email;
     private String password;
 
     public User(){}
 
     public User(Long id, Role role, String firstname, String lastname, String identityNumber, String phoneNumber,
-                String birthdate, String email, String password) {
+                LocalDate birthdate, String email, String password) {
         this.id = id;
         this.role = role;
         this.firstname = firstname;
@@ -75,10 +78,10 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
-    public String getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 

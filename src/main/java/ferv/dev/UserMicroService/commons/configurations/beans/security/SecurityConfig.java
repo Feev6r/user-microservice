@@ -1,6 +1,7 @@
 package ferv.dev.UserMicroService.commons.configurations.beans.security;
 
 import ferv.dev.UserMicroService.category.domain.models.Role;
+import ferv.dev.UserMicroService.category.infrastructure.security.filters.TokenAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +12,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private  final  AuthenticationFilter authenticationFilter;
+    private  final TokenAuthenticationFilter tokenAuthenticationFilter;
     private  final AuthenticationProvider authenticationProvider;
 
     @Bean
@@ -46,7 +46,7 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authenticationProvider(authenticationProvider
-                ).addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class
+                ).addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class
                 );
 
         return http.build();

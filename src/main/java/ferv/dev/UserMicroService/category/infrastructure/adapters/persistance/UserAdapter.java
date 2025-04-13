@@ -1,7 +1,7 @@
 package ferv.dev.UserMicroService.category.infrastructure.adapters.persistance;
 
 import ferv.dev.UserMicroService.category.domain.models.User;
-import ferv.dev.UserMicroService.category.domain.ports.out.UserPersistancePort;
+import ferv.dev.UserMicroService.category.domain.ports.out.UserPersistencePort;
 import ferv.dev.UserMicroService.category.infrastructure.mappers.UserEntityMapper;
 import ferv.dev.UserMicroService.category.infrastructure.repositories.mysql.UserRepository;
 import ferv.dev.UserMicroService.commons.configurations.utils.Constants;
@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class UserAdapter implements UserPersistancePort {
+public class UserAdapter implements UserPersistencePort {
 
     private final UserRepository userRepository;
     private final UserEntityMapper userEntityMapper;

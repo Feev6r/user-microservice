@@ -2,35 +2,35 @@ package ferv.dev.UserMicroService.category.domain.usecases;
 
 import ferv.dev.UserMicroService.category.domain.models.User;
 import ferv.dev.UserMicroService.category.domain.ports.in.UserServicePort;
-import ferv.dev.UserMicroService.category.domain.ports.out.UserPersistancePort;
+import ferv.dev.UserMicroService.category.domain.ports.out.UserPersistencePort;
 
 import java.util.List;
 
 public class UserUseCase implements UserServicePort {
 
-    private final UserPersistancePort userPersistancePort;
+    private final UserPersistencePort userPersistencePort;
 
-    public UserUseCase(UserPersistancePort userPersistancePort) {
-        this.userPersistancePort = userPersistancePort;
+    public UserUseCase(UserPersistencePort userPersistencePort) {
+        this.userPersistencePort = userPersistencePort;
     }
 
     @Override
     public User getUserByEmail(String email) {
-        return userPersistancePort.getUserByEmail(email);
+        return userPersistencePort.getUserByEmail(email);
     }
 
     @Override
     public void saveUser(User user) {
-        userPersistancePort.saveUser(user);
+        userPersistencePort.saveUser(user);
     }
 
     @Override
     public User getUser(Long userId) {
-        return userPersistancePort.getUser(userId);
+        return userPersistencePort.getUser(userId);
     }
 
     @Override
     public List<User> getAllUser(Integer size, Integer page, boolean orderAsc) {
-        return userPersistancePort.getAllUser(size, page, orderAsc);
+        return userPersistencePort.getAllUser(size, page, orderAsc);
     }
 }

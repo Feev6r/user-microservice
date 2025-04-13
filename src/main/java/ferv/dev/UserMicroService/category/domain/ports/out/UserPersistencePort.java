@@ -4,7 +4,7 @@ import ferv.dev.UserMicroService.category.domain.models.User;
 
 import java.util.List;
 
-public interface UserPersistancePort {
+public interface UserPersistencePort {
 
     User getUserByEmail(String email);
     void saveUser(User user);
