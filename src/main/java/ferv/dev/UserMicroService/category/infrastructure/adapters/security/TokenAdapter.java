@@ -42,14 +42,14 @@ public class TokenAdapter implements TokenServicePort {
     }
 
     @Override
-    public String getUserEmailBySecurityContext(){
+    public Long getUserIdBySecurityContext(){
         // contexto de seguridad
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         UserEntity userEntity = (UserEntity) authentication.getPrincipal();
 
         // El principal es el id que almacenamos en el filtro
-        return userEntity.getEmail();
+        return Long.parseLong(userEntity.getUsername());
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver){

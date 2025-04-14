@@ -2,6 +2,7 @@ package ferv.dev.UserMicroService.category.domain.usecases;
 
 import ferv.dev.UserMicroService.category.domain.models.User;
 import ferv.dev.UserMicroService.category.domain.ports.in.UserServicePort;
+import ferv.dev.UserMicroService.category.domain.ports.out.TokenServicePort;
 import ferv.dev.UserMicroService.category.domain.ports.out.UserPersistencePort;
 
 import java.util.List;
@@ -9,9 +10,11 @@ import java.util.List;
 public class UserUseCase implements UserServicePort {
 
     private final UserPersistencePort userPersistencePort;
+    private final TokenServicePort tokenServicePort;
 
-    public UserUseCase(UserPersistencePort userPersistencePort) {
+    public UserUseCase(UserPersistencePort userPersistencePort, TokenServicePort tokenServicePort) {
         this.userPersistencePort = userPersistencePort;
+        this.tokenServicePort = tokenServicePort;
     }
 
     @Override
@@ -25,8 +28,14 @@ public class UserUseCase implements UserServicePort {
     }
 
     @Override
-    public User getUser(Long userId) {
+    public User getUserBySecurityContext() {
+        Long userId = tokenServicePort.getUserIdBySecurityContext();
         return userPersistencePort.getUser(userId);
+    }
+
+    @Override
+    public User getUser(Long id) {
+        return userPersistencePort.getUser(id);
     }
 
     @Override

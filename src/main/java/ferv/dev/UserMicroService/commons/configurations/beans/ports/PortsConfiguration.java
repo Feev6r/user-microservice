@@ -26,7 +26,7 @@ public class PortsConfiguration {
 
     @Bean
     public UserUseCase userUseCase(){
-        return new UserUseCase(userPersistencePort);
+        return new UserUseCase(userPersistencePort, tokenServicePort);
     }
 
 

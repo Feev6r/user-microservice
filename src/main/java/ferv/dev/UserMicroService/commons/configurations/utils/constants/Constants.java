@@ -1,4 +1,4 @@
-package ferv.dev.UserMicroService.commons.configurations.utils;
+package ferv.dev.UserMicroService.commons.configurations.utils.constants;
 
 public final class Constants {
     private Constants() {

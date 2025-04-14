@@ -6,6 +6,7 @@ import ferv.dev.UserMicroService.category.application.dto.request.OwnerRequest;
 import ferv.dev.UserMicroService.category.application.dto.request.UserAuthRequest;
 import ferv.dev.UserMicroService.category.application.dto.response.AuthResponse;
 import ferv.dev.UserMicroService.category.application.services.AuthApplicationService;
+import ferv.dev.UserMicroService.commons.configurations.utils.constants.ApiPaths;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,33 +16,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/auth")
+@RequestMapping(ApiPaths.Auth.BASE)
 @RequiredArgsConstructor
 public class AuthController {
 
     private final AuthApplicationService authApplicationService;
 
-    @PostMapping("/admin")
+    @PostMapping(ApiPaths.Auth.ADMIN)
     public ResponseEntity<AuthResponse> registerAdmin(@Valid @RequestBody OwnerRequest adminRequest){
         return ResponseEntity.ok(authApplicationService.registerOwner(adminRequest));
     }
 
-    @PostMapping("/owner")
+    @PostMapping(ApiPaths.Auth.OWNER)
     public ResponseEntity<AuthResponse> registerOwner(@Valid @RequestBody OwnerRequest ownerRequest){
         return ResponseEntity.ok(authApplicationService.registerOwner(ownerRequest));
     }
 
-    @PostMapping("/employee")
+    @PostMapping(ApiPaths.Auth.EMPLOYEE)
     public ResponseEntity<AuthResponse> registerEmployee(@Valid @RequestBody EmployeeRequest employeeRequest){
         return ResponseEntity.ok(authApplicationService.registerEmployee(employeeRequest));
     }
 
-    @PostMapping("/client")
+    @PostMapping(ApiPaths.Auth.CLIENT)
     public ResponseEntity<AuthResponse> registerClient(@Valid @RequestBody ClientRequest clientRequest){
         return ResponseEntity.ok(authApplicationService.registerClient(clientRequest));
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping(ApiPaths.Auth.AUTHENTICATE)
     public ResponseEntity<AuthResponse> authenticate(@Valid @RequestBody UserAuthRequest userAuthRequest){
         return ResponseEntity.ok(authApplicationService.authenticate(userAuthRequest));
     }

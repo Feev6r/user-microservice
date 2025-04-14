@@ -7,8 +7,9 @@ import java.util.List;
 public interface UserServicePort {
     User getUserByEmail(String email);
     void saveUser(User user);
-    User getUser(Long userId);
-    List<User> getAllUser(Integer page, Integer size, boolean orderAsc); //todo los usuarios - solo admin
+    User getUserBySecurityContext();
+    User getUser(Long id);
+    List<User> getAllUser(Integer size, Integer page,  boolean orderAsc); //todo los usuarios - solo admin
 
 
 }

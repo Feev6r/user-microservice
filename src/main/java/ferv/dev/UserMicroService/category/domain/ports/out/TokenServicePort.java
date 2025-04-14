@@ -6,7 +6,7 @@ import ferv.dev.UserMicroService.category.domain.models.User;
 public interface TokenServicePort {
 
     String extractUsername(String token);
-    String getUserEmailBySecurityContext();
+    Long getUserIdBySecurityContext();
     String generateToken(User user);
     boolean isTokenValid(String token, String username);
 

@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserApplicationService {
 
     UserResponse getUser(); //personal info
-    List<UserResponse> getAllUser(); //all users - only admin
+    List<UserResponse> getAllUser(Integer size, Integer page, boolean orderAsc); //all users - only admin
     UserResponse getUserById(Long id);
     UserContactInfoResponse getUserContact(Long id); //Specific info from user
 

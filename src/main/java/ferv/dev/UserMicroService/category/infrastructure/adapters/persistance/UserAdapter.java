@@ -2,9 +2,10 @@ package ferv.dev.UserMicroService.category.infrastructure.adapters.persistance;
 
 import ferv.dev.UserMicroService.category.domain.models.User;
 import ferv.dev.UserMicroService.category.domain.ports.out.UserPersistencePort;
+import ferv.dev.UserMicroService.category.infrastructure.exeptionshandler.exeptions.UserNotFound;
 import ferv.dev.UserMicroService.category.infrastructure.mappers.UserEntityMapper;
 import ferv.dev.UserMicroService.category.infrastructure.repositories.mysql.UserRepository;
-import ferv.dev.UserMicroService.commons.configurations.utils.Constants;
+import ferv.dev.UserMicroService.commons.configurations.utils.constants.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,12 +25,14 @@ public class UserAdapter implements UserPersistencePort {
 
     @Override
     public User getUserByEmail(String email) {
-        return userEntityMapper.toUser(userRepository.findByEmail(email).orElse(null));
+        return userEntityMapper.toUser(userRepository.findByEmail(email)
+                .orElseThrow(UserNotFound::new));
     }
 
     @Override
     public User getUser(Long userId) {
-        return userEntityMapper.toUser(userRepository.findById(userId).orElse(null));
+        return userEntityMapper.toUser(userRepository.findById(userId)
+                .orElseThrow(UserNotFound::new));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package ferv.dev.UserMicroService.category.domain.usecases;
 
+import ferv.dev.UserMicroService.category.domain.exeptions.NotValidAgeExeption;
 import ferv.dev.UserMicroService.category.domain.models.Role;
 import ferv.dev.UserMicroService.category.domain.models.User;
 import ferv.dev.UserMicroService.category.domain.ports.in.AuthServicePort;
@@ -25,12 +26,11 @@ public class AuthUseCase  implements AuthServicePort {
     @Override
     public String register(User user) {
         if(user.getRole() == Role.OWNER){
-            LocalDate birhtDate = user.getBirthdate();
+            LocalDate birthDate = user.getBirthdate();
             LocalDate minDate = LocalDate.now().minusYears(18);
 
-            if (!birhtDate.isBefore(minDate) && !birhtDate.isEqual(minDate)) {
-                throw new RuntimeException("The user has to be at least 18 years old");
-                //TODO exeption here
+            if (!birthDate.isBefore(minDate) && !birthDate.isEqual(minDate)) {
+                throw new NotValidAgeExeption();
             }
         }
 
