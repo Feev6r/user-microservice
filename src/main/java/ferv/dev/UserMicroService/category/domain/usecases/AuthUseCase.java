@@ -7,7 +7,6 @@ import ferv.dev.UserMicroService.category.domain.ports.in.AuthServicePort;
 import ferv.dev.UserMicroService.category.domain.ports.out.AuthManagerPort;
 import ferv.dev.UserMicroService.category.domain.ports.out.TokenServicePort;
 import ferv.dev.UserMicroService.category.domain.ports.out.UserPersistencePort;
-import org.springframework.context.annotation.Lazy;
 
 import java.time.LocalDate;
 

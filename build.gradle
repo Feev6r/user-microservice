@@ -13,6 +13,7 @@ java {
 	}
 }
 
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -52,6 +53,8 @@ dependencies {
 	// Tests
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation 'org.assertj:assertj-core:3.26.3'
+	testImplementation 'com.h2database:h2'
 
 	//Jakarta
 	implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'

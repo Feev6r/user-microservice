@@ -2,6 +2,7 @@ package ferv.dev.UserMicroService.commons.configurations.beans.security;
 
 import ferv.dev.UserMicroService.category.domain.models.Role;
 import ferv.dev.UserMicroService.category.infrastructure.security.filters.TokenAuthenticationFilter;
+import ferv.dev.UserMicroService.commons.configurations.utils.constants.ApiPaths;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,16 +29,16 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable
                 )
                 .authorizeHttpRequests(authorize -> authorize
-                        // .requestMatchers("/auth/registerAdmin").permitAll() //no esta es necesario estar autenticado porque es para testeo
-                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+//                         .requestMatchers(ApiPaths.Auth.BASE + ApiPaths.Auth.ADMIN).permitAll() //
+                        //.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
 
-                        .requestMatchers("/auth/registerClient").permitAll()
-                        .requestMatchers("/auth/authenticate").permitAll()
-                        .requestMatchers("/user/getAll").hasRole(Role.ADMIN.name())
-                        .requestMatchers("/auth/registerOwner").hasRole(Role.ADMIN.name())
-                        .requestMatchers("/auth/registerEmployee").hasRole(Role.OWNER.name())
-                        .requestMatchers("/user/get/{id}").hasRole(Role.OWNER.name())
-                        .requestMatchers("/user/getContact/{id}").hasRole(Role.EMPLOYEE.name())
+                        .requestMatchers(ApiPaths.Auth.BASE + ApiPaths.Auth.CLIENT).permitAll()
+                        .requestMatchers(ApiPaths.Auth.BASE + ApiPaths.Auth.AUTHENTICATE).permitAll()
+                        .requestMatchers(ApiPaths.User.BASE + ApiPaths.User.ALL).hasRole(Role.ADMIN.name())
+                        .requestMatchers(ApiPaths.Auth.BASE + ApiPaths.Auth.OWNER).hasRole(Role.ADMIN.name())
+                        .requestMatchers(ApiPaths.Auth.BASE + ApiPaths.Auth.EMPLOYEE).hasRole(Role.OWNER.name())
+                        .requestMatchers(ApiPaths.User.BASE + ApiPaths.User.GET_BY_ID).hasRole(Role.OWNER.name())
+                        .requestMatchers(ApiPaths.User.BASE + ApiPaths.User.GET_CONTACT).hasRole(Role.EMPLOYEE.name())
                         .anyRequest().authenticated()
                 )
                 .logout(LogoutConfigurer::permitAll

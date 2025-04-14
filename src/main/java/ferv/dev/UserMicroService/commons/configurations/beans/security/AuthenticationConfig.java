@@ -2,6 +2,7 @@ package ferv.dev.UserMicroService.commons.configurations.beans.security;
 
 
 import ferv.dev.UserMicroService.category.infrastructure.repositories.mysql.UserRepository;
+import ferv.dev.UserMicroService.commons.configurations.utils.constants.ErrorMessages;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,9 +28,9 @@ public class AuthenticationConfig {
             try {
                 Long userId = Long.parseLong(username);
                 return userRepository.findById(userId)
-                        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                        .orElseThrow(() -> new UsernameNotFoundException(ErrorMessages.USERNAME_MESSAGE_EXEPTION));
             } catch (NumberFormatException e) {
-                throw new UsernameNotFoundException("Invalid user id format");
+                throw new UsernameNotFoundException(ErrorMessages.USERNAME_FORMAT_MESSAGE_EXEPTION);
             }
         };
     }
